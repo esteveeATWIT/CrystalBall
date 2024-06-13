@@ -40,10 +40,14 @@ Now, using this spreadsheet, create a spreadsheet with the following statistics:
 - The Home Team's run scored
 - The Away Team's runs scored
 - Whether the home team won or lost
+- The ERA of the Home Team before the game was played
 - The ERA of the Visiting Team before the game was played
+- The WHIP of the Home Team before the game was played
 - The WHIP of the Visiting Team before the game was played
 - The SLG of the Home Team before the game was played
+- The SLG of the Visiting Team before the game was played
 - The OBP of the Home Team beore the game was played
+- The OBP of the Visiting Team beore the game was played
 - The Pythagorean Winning Percentage of the Home Team before the game was played
 
 ----------------------------------------------------------------------------------------
