@@ -5,8 +5,8 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 
 # Load the training and testing data
-training_data_path = 'Training Data (2012-2022).xlsx'
-testing_data_path = 'Testing Data (2023).xlsx'
+training_data_path = 'backend\Training Data (2012-2022).xlsx'
+testing_data_path = 'backend\Testing Data (2023).xlsx'
 
 training_data = pd.read_excel(training_data_path)
 testing_data = pd.read_excel(testing_data_path)
@@ -44,5 +44,5 @@ accuracy = accuracy_score(y_test, y_pred_binary)
 print('Accuracy: ', accuracy)
 
 # Save the trained model
-joblib.dump(model, 'linear_regression_model.pkl')
-joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(model, 'backend\linear_regression_model.pkl')
+joblib.dump(scaler, 'backend\scaler.pkl')
