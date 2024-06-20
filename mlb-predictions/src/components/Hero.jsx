@@ -32,7 +32,7 @@ const Hero = () => {
   return (
     <header style={heroStyle}>
       <div style={textContainerStyle}>
-        <h1 style={headingStyle}>Welcome to MLB Game Predictions</h1>
+        <h1 style={headingStyle}>Welcome to Crystal Ball </h1>
         <p style={subHeadingStyle}>Predicting the outcomes of MLB games with our advanced algorithm.</p>
       </div>
     </header>
