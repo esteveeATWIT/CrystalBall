@@ -2,6 +2,7 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import accuracy_score
 from sklearn.preprocessing import StandardScaler
+import joblib
 
 # Load the training and testing data
 training_data_path = 'Training Data (2012-2022).xlsx'
@@ -41,3 +42,7 @@ y_pred_binary = [1 if pred >= 0.5 else 0 for pred in y_pred]
 accuracy = accuracy_score(y_test, y_pred_binary)
 
 print('Accuracy: ', accuracy)
+
+# Save the trained model
+joblib.dump(model, 'linear_regression_model.pkl')
+joblib.dump(scaler, 'scaler.pkl')
