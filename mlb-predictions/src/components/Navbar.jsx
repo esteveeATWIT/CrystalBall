@@ -43,7 +43,7 @@ const Navbar = () => {
   return (
     <nav style={navStyle}>
       <div style={navContainerStyle}>
-        <a href="#" style={logoStyle}>MLB Predictions</a>
+        <a href="#" style={logoStyle}>Crystal Ball</a>
         <ul style={navLinksStyle}>
           <li><a href="#home" style={linkStyle}>Home</a></li>
           <li><a href="#project" style={linkStyle}>Our Project</a></li>
