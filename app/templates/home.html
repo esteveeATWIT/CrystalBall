@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block title %}MLB Game Predictions{% endblock %}
+
+{% block content %}
+    <h2>Today's Predictions</h2>
+    <table id="predictions-table">
+        <thead>
+            <tr>
+                <th>Home Team</th>
+                <th>Opponent</th>
+                <th>Home Team Chance of Victory</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchPredictions() {
+            const response = await fetch('/get_predictions');
+            const data = await response.json();
+
+            if (response.ok) {
+                let tableBody = document.querySelector('#predictions-table tbody');
+                tableBody.innerHTML = '';
+                data.forEach(prediction => {
+                    let row = document.createElement('tr');
+                    row.innerHTML = `
+                        <td>${prediction.home_team}</td>
+                        <td>${prediction.away_team}</td>
+                        <td>${prediction.prediction}%</td>
+                    `;
+                    tableBody.appendChild(row);
+                });
+            } else {
+                alert(data.error);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', fetchPredictions);
+    </script>
+{% endblock %}
