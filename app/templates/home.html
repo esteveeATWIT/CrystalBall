@@ -3,13 +3,13 @@
 {% block title %}MLB Game Predictions{% endblock %}
 
 {% block content %}
-    <h2>Today's Predictions</h2>
+    <h2>Today's Predictions as of <p id="datetime"><p></h2>
     <table id="predictions-table">
         <thead>
             <tr>
                 <th>Home Team</th>
                 <th>Opponent</th>
-                <th>Home Team Chance of Victory</th>
+                <th>Home Team Chance of Victory (%)</th>
             </tr>
         </thead>
         <tbody>
@@ -39,5 +39,12 @@
         }
 
         document.addEventListener('DOMContentLoaded', fetchPredictions);
+    </script>
+    <script>
+        // Get current date and time
+        var now = new Date();
+        var datetime = now.toLocaleString();
+
+        document.getElementById("datetime").innerHTML = datetime;
     </script>
 {% endblock %}

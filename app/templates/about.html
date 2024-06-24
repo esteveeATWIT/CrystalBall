@@ -3,17 +3,22 @@
 {% block title %}About{% endblock %}
 
 {% block content %}
+<div class="card">
     <h2>About The Developers</h2>
     <h3>Matthew Frechette</h3>
+    <img src="{{ url_for('static', filename='images/matt_frechette.jpg') }}" alt="Matt" style="width:400px;height:400px;">
     <p>
         Matthew is a senior at Wenworth studying computer science. He was a member of the men's lacrosse team and was in charge of developing and training the prediction model and algorithm.
     </p>
     <h3>Enrique Esteve</h3>
+    <img src="{{ url_for('static', filename='images/enrique.jpg') }}" alt="Enrique" style="width:400px;height:400px;">
     <p>
-
+        Enrique description
     </p>
     <h3>Nael Al-Assaad</h3>
+    <img src="{{ url_for('static', filename='images/nael.jpg') }}" alt="Nael" style="width:400px;height:400px;">
     <p>
-
+        Nael Description
     </p>
+</div> 
 {% endblock %}
