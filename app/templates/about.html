@@ -1,28 +1,48 @@
-{% extends "base.html" %}
-
-{% block title %}About{% endblock %}
-
-{% block content %}
+{% extends "base.html" %} {% block title %}About{% endblock %} {% block content
+%}
 <div class="card">
-    <h2>About The Developers</h2>
-    <h3>Matthew Frechette</h3>
-    <img src="{{ url_for('static', filename='images/matt_frechette.jpg') }}" alt="Matt" style="width:400px;height:400px;">
-    <p>
-        Matthew is a senior at Wenworth studying computer science. On this project, Matthew developed and trained the machine learning
-        model used for making the predictions on every MLB game. Matthew also worked with the other developers to integrate that model
-        with the database and website you are viewing now. Outside of this project, Matthew has co-op experience in the world of IT with 
-        Methuen Construction Inc., EchoStor Technologies, and Harvard University, and plans on entering the workforce back in his home 
-        state of New Hampshire. Matthew was also a 4 year member and captain of the men's lacrosse team at Wentworth.
-    </p>
-    <h3>Enrique Esteve</h3>
-    <img src="{{ url_for('static', filename='images/enrique.jpg') }}" alt="Enrique" style="width:400px;height:400px;">
-    <p>
-        Enrique description
-    </p>
-    <h3>Nael Al-Assaad</h3>
-    <img src="{{ url_for('static', filename='images/nael.jpg') }}" alt="Nael" style="width:400px;height:400px;">
-    <p>
-        Nael Description
-    </p>
-</div> 
+  <h2>About The Developers</h2>
+  <h3>Matthew Frechette</h3>
+  <img
+    src="{{ url_for('static', filename='images/matt_frechette.jpg') }}"
+    alt="Matt"
+    style="width: 400px; height: 400px"
+  />
+  <p>
+    Matthew is a senior at Wenworth studying computer science. On this project,
+    Matthew developed and trained the machine learning model used for making the
+    predictions on every MLB game. Matthew also worked with the other developers
+    to integrate that model with the database and website you are viewing now.
+    Outside of this project, Matthew has co-op experience in the world of IT
+    with Methuen Construction Inc., EchoStor Technologies, and Harvard
+    University, and plans on entering the workforce back in his home state of
+    New Hampshire. Matthew was also a 4 year member and captain of the men's
+    lacrosse team at Wentworth.
+  </p>
+  <h3>Enrique Esteve</h3>
+  <img
+    src="{{ url_for('static', filename='images/enrique.jpg') }}"
+    alt="Enrique"
+    style="width: 400px; height: 400px"
+  />
+  <p>
+    Enrique is a senior at Wentworth studying Computer Science. For this
+    project, Enrique was responsible for creating the MySQL database and
+    managing its implementation. He developed the web scraping script which
+    helped populate the database with live statistics, needed for the algorithm
+    to make predictions. Enrique also collaborated with all developers on the
+    integration of the model with the database and website. In terms of his
+    background, Enrique has worked as a Data Scientist at Epicore Biosystems,
+    and as a Technical Support Engineer at Harvard University. Moving forward he
+    will be working as a Software Engineering intern at ECI Software Solutions
+    to continue learning and become a better developer.
+  </p>
+  <h3>Nael Al-Assaad</h3>
+  <img
+    src="{{ url_for('static', filename='images/nael.jpg') }}"
+    alt="Nael"
+    style="width: 400px; height: 400px"
+  />
+  <p>Nael Description</p>
+</div>
 {% endblock %}
