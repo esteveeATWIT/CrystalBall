@@ -11,7 +11,7 @@ import re
 import requests
 from bs4 import BeautifulSoup
 
-def create_connection():
+def create_connection():  #Method to connect to our mysql database. Since we're using phpmyadmin, user is root and there is no password.
     try:
         connection = mysql.connector.connect(
             host='localhost',
@@ -25,7 +25,7 @@ def create_connection():
         print("Error while connecting to MySQL", e)
     return None
     
-
+#This function will update the database with the current team statistics. Everytime the script runs the database is updated.
 def insert_team_stats(connection, teamID, games_played, games_won, ERA, OBP, Whip, Slg):
     cursor = connection.cursor()
     update_query = """
@@ -36,7 +36,7 @@ def insert_team_stats(connection, teamID, games_played, games_won, ERA, OBP, Whi
     cursor.execute(update_query, (games_played, games_won, ERA, OBP, Whip, Slg, teamID))
     connection.commit()
 
-def scrape_teamids(): #This will get the names and put it on a list
+def scrape_teamids(): #This will get the team names and put it on a list
     url = 'https://www.espn.com/mlb/stats/team/_/table/batting/sort/gamesPlayed/dir/desc' 
 
     driver = webdriver.Chrome(service=ChromeService(ChromeDriverManager().install()))
@@ -71,7 +71,7 @@ def scrape_teamids(): #This will get the names and put it on a list
 
     return teamslist
 
-def scrape_batting_stats(): #grabbing the batting stats needed for algorithm and adding to list
+def scrape_batting_stats(): #grabbing the batting stats needed for algorithm and adding to a list
     url = 'https://www.espn.com/mlb/stats/team/_/table/batting/sort/gamesPlayed/dir/desc' 
 
     #header for bypassing the website so we can connect succesfully (makes the request look like it's coming from a real browser)
@@ -133,7 +133,8 @@ def scrape_pitching_stats(): #grabbing pitching stats and putting on list
 
     return pitching_stats
 
-def combine_stats(team_ids, batting_stats, pitching_stats):
+#Since all stats are split into different lists, this function combines everything into one list so that it can be sent to the database.
+def combine_stats(team_ids, batting_stats, pitching_stats): 
     combined_stats = []
     for i in range(len(team_ids)):
         combined_stats.append((
@@ -147,7 +148,8 @@ def combine_stats(team_ids, batting_stats, pitching_stats):
         ))
     return combined_stats
 
-
+# main function will use all methods, connect to database first, scrape all stats then combine them into one list. Finally it will use
+# the database method to update it. When all is finished, the connection to the database will be closed.  
 def main():
     
     connection = create_connection()
