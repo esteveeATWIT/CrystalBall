@@ -12,6 +12,7 @@ app = Flask(__name__)
 model = joblib.load('linear_regression_model.pkl')
 scaler = joblib.load('scaler.pkl')
 
+# Dictionary to map team abbreviations to full names
 teamNames = {
     "ARI": "Arizona Diamondbacks",
     "ATL": "Atlanta Braves",
@@ -45,6 +46,7 @@ teamNames = {
     "WSH": "Washington Nationals"
 }
 
+# Function to create a database connection
 def create_connection():
     try:
         connection = mysql.connector.connect(
@@ -59,6 +61,7 @@ def create_connection():
         print("Error while connecting to MySQL", e)
     return None
 
+# Function to get team statistics from the database
 def get_team_stats(connection, team_name):
     cursor = connection.cursor(dictionary=True)
     query = "SELECT * FROM teams WHERE teamID = %s"
@@ -66,14 +69,17 @@ def get_team_stats(connection, team_name):
     result = cursor.fetchone()
     return result
 
+# Function to calculate win probability using the Log5 method
 def log5_win_probability(home_team_wp, away_team_wp):
     return (home_team_wp - home_team_wp * away_team_wp) / (home_team_wp + away_team_wp - 2 * home_team_wp * away_team_wp)
 
+# Function to predict the outcome of a game
 def predict_game(home_team_stats, away_team_stats):
     home_team_wp = home_team_stats['games_won'] / home_team_stats['games_played']
     away_team_wp = away_team_stats['games_won'] / away_team_stats['games_played']
     log5_probability = log5_win_probability(home_team_wp, away_team_wp)
     
+    # Combine relevant statistics for prediction
     combined_stats = {
         'HomeTeamERA': home_team_stats['ERA'],
         'AwayTeamERA': away_team_stats['ERA'],
@@ -87,11 +93,13 @@ def predict_game(home_team_stats, away_team_stats):
         'HomeTeamLog5WP': log5_probability
     }
     
+    # Scale the combined statistics and make a prediction
     combined_stats_df = pd.DataFrame([combined_stats])
     combined_stats_scaled = scaler.transform(combined_stats_df)
     prediction = model.predict(combined_stats_scaled)[0]
     return round(prediction*100, 4)
 
+# Function to get today's MLB schedule using an API
 def get_mlb_schedule_today(api_key):
     today_date = datetime.today().strftime('%Y-%m-%d')
     url = f"https://api.sportsdata.io/v3/mlb/scores/json/GamesByDate/{today_date}"
@@ -104,6 +112,7 @@ def get_mlb_schedule_today(api_key):
         print(f"Failed to retrieve data: {response.status_code}")
         return []
 
+# Function to save predictions to the database
 def save_predictions(predictions):
     connection = create_connection()
     if connection is None:
@@ -119,18 +128,22 @@ def save_predictions(predictions):
     connection.commit()
     connection.close()
 
+# Route for the home page
 @app.route('/')
 def home():
     return render_template('home.html')
 
+# Route for the about page
 @app.route('/about')
 def about():
     return render_template('about.html')
 
+# Route for the project page
 @app.route('/project')
 def project():
     return render_template('project.html')
 
+# Route to get today's predictions
 @app.route('/get_predictions', methods=['GET'])
 def get_predictions():
     connection = create_connection()
@@ -148,6 +161,7 @@ def get_predictions():
     
     return jsonify(predictions)
 
+# Main function to orchestrate the prediction process
 def main():
     api_key = '7f0204d9a6d946419f253fb71d198868'
     schedule = get_mlb_schedule_today(api_key)
@@ -161,18 +175,16 @@ def main():
         print("Failed to connect to the database.")
         return
     
-    # Check if predictions for today already exist
+    # Clear existing predictions for today
     cursor = connection.cursor()
     cursor.execute("""
-        SELECT COUNT(*) FROM predictions WHERE game_date = %s
+        DELETE FROM predictions WHERE game_date = %s
     """, (datetime.today().date(),))
-    if cursor.fetchone()[0] > 0:
-        print("Predictions for today already exist.")
-        connection.close()
-        return
+    connection.commit()
     
     predictions = []
 
+    # Iterate over each game in the schedule and make predictions
     for game in schedule:
         home_team_abbr = game['HomeTeam']
         away_team_abbr = game['AwayTeam']
@@ -193,6 +205,7 @@ def main():
         else:
             print(f"Stats not found for one of the teams: {home_team}, {away_team}")
     
+    # Save the new predictions to the database
     save_predictions(predictions)
     connection.close()
     
