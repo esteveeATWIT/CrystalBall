@@ -236,7 +236,7 @@ def predict_game(home_team_stats, away_team_stats):
     combined_stats_df = pd.DataFrame([combined_stats])
     combined_stats_scaled = scaler.transform(combined_stats_df)
     prediction = model.predict(combined_stats_scaled)[0]
-    return round(prediction*100, 4)
+    return round(prediction*100, 2)
 
 # Function to get today's MLB schedule using an API
 def get_mlb_schedule_today(api_key):
