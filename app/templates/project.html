@@ -16,7 +16,7 @@
             the numbers? Using machine learning and advanced data gathering, we were able to find out.
         </p>
         <h3>The Algorithm</h3>
-        <img src="{{ url_for('static', filename='images/linregmodel.png') }}" alt="Linear Regression Model" style="width: 600px; height: 400px"/>
+        <img src="{{ url_for('static', filename='images/featureimportance.png') }}" alt="Linear Regression Model" style="width: 600px; height: 400px"/>
         <p>
             Through extensive research and trial and error, we decided to utilize a linear regression model to base our predictions on. What is linear regression?
             Linear regression analysis is used to predict the value of a variable based on the value of another variable. The variable you want to predict is called
@@ -24,10 +24,6 @@
             over ten years of baseball statistics to create an independent variable based on the home team's batting and pitching statistics before the game was played.
             The algorithm looks at this variable, generates a probability of victory for the home team, and then compares the result of the game to the prediction. The figure
             shown above illustrates the results of our linear regression model when tested against the full 2023 MLB schedule.
-        </p>
-        <h3>Training the Algorithm</h3>
-        <img src="{{ url_for('static', filename='images/featureimportance.png') }}" alt="Feature Importance Chart" style="width: 600px; height: 400px"/>
-        <p>
             In order for our algorithm to actually make predictions, we needed to train and test the algorithm with raw baseball data. We were able to obtain game-by-game
             logs from <a href="https://www.retrosheet.org/">Retro Sheet</a> and utilized ChatGPT to help us turn those logs into over 24,000 "pre-game reports". Using these
             reports, we were able to show the algorithm the results of the game, and each teams statistics before the game was played, so that it could learn what stats lead 
