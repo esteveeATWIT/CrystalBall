@@ -49,28 +49,3 @@ print('Accuracy: ', accuracy)
 # Save the trained model
 joblib.dump(model, 'linear_regression_model.pkl')
 joblib.dump(scaler, 'scaler.pkl')
-
-
-# Plot the regression line (for a single feature example)
-plt.figure(figsize=(12, 8))
-plt.scatter(X_test_scaled[:, 0], y_test, color='blue', label='Actual', alpha=0.6, edgecolors='w', s=100)
-plt.scatter(X_test_scaled[:, 0], y_pred, color='red', label='Predicted', alpha=0.6, edgecolors='w', s=100)
-plt.plot(np.sort(X_test_scaled[:, 0]), np.sort(y_pred), color='green', linewidth=2)
-plt.xlabel('Feature 1 (scaled)', fontsize=14)
-plt.ylabel('Home Team Won', fontsize=14)
-plt.title('Linear Regression - Actual vs Predicted', fontsize=16)
-plt.legend()
-plt.grid(True, linestyle='--', alpha=0.7)
-plt.show()
-
-# Feature importance
-importance = model.coef_
-features = X_train.columns
-
-plt.figure(figsize=(12, 8))
-sns.barplot(x=importance, y=features)
-plt.xlabel('Coefficient Value', fontsize=14)
-plt.ylabel('Features', fontsize=14)
-plt.title('Feature Importance', fontsize=16)
-plt.grid(True, linestyle='--', alpha=0.7)
-plt.show()
