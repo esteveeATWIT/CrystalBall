@@ -8,8 +8,8 @@ import seaborn as sns
 import numpy as np
 
 # Load the training and testing data
-training_data_path = 'Training Data (2012-2022).xlsx'
-testing_data_path = 'Testing Data (2023).xlsx'
+training_data_path = 'app/Training Data (2012-2022).xlsx'
+testing_data_path = 'app/Testing Data (2023).xlsx'
 
 training_data = pd.read_excel(training_data_path)
 testing_data = pd.read_excel(testing_data_path)
@@ -47,5 +47,17 @@ accuracy = accuracy_score(y_test, y_pred_binary)
 print('Accuracy: ', accuracy)
 
 # Save the trained model
-joblib.dump(model, 'linear_regression_model.pkl')
-joblib.dump(scaler, 'scaler.pkl')
+joblib.dump(model, 'app/linear_regression_model.pkl')
+joblib.dump(scaler, 'app/scaler.pkl')
+
+# Generate Weight Value Chart
+weight = model.coef_
+features = X_train.columns
+
+plt.figure(figsize=(12, 8))
+sns.barplot(x=weight, y=features)
+plt.xlabel('Weight Value', fontsize=14)
+plt.ylabel('Features', fontsize=14)
+plt.title('Feature Weight Values', fontsize=16)
+plt.grid(True, linestyle='--', alpha=0.7)
+plt.show()
