@@ -264,6 +264,15 @@ def save_predictions(predictions):
     connection.commit()
     connection.close()
 
+def save_past_predictions(connection):
+    cursor = connection.cursor()
+    cursor.execute("""
+        INSERT IGNORE INTO past_predictions (home_team, away_team, prediction, game_date)
+        SELECT home_team, away_team, prediction, game_date
+        FROM predictions
+    """)
+    connection.commit()   
+
 ###################################################################################
 # Main Function #
 ###################################################################################
@@ -293,6 +302,9 @@ def main():
         print("No games scheduled for today.")
         return
     
+    #Save yesterdays predictions into past predictions table. 
+    save_past_predictions(connection)
+
     # Clear existing predictions for today
     cursor = connection.cursor()
     cursor.execute("""DELETE FROM predictions WHERE id > 0""")
