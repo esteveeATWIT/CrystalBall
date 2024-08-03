@@ -29,3 +29,7 @@ _Below is how to install and run our project on your machine locally._
 4. Run the linreg.py script to ensure the .pkl files are working.
 5. Run the backend.py script to update the database and generate predictions for the day.
 6. Run the app.py script and then go to http://127.0.0.1:5000 to access the website.
+
+## Usage
+View the video below to see a quick demo. 
+[![Crystal Ball](https://i9.ytimg.com/vi_webp/A5NYVScRJEw/mq2.webp?sqp=CPDWubUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGDQgTSh_MA8=&rs=AOn4CLCUKfUNnEJJziKn9tpCg2KfD1GN_w)](https://youtu.be/A5NYVScRJEw)
