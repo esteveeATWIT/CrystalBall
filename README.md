@@ -35,3 +35,15 @@ _Below is how to install and run our project on your machine locally._
 View the video below to see a quick demo. 
 
 [![Crystal Ball](https://i9.ytimg.com/vi_webp/A5NYVScRJEw/mq2.webp?sqp=CPDWubUG-oaymwEmCMACELQB8quKqQMa8AEB-AH-CYAC0AWKAgwIABABGDQgTSh_MA8=&rs=AOn4CLCUKfUNnEJJziKn9tpCg2KfD1GN_w)](https://youtu.be/A5NYVScRJEw)
+
+
+## License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+
+## Contacts
+
+Nael Al-Assaad - alassaadn@wit.edu <br />
+Enrique Esteve - estevee@wit.edu <br />
+Matthew Frechette - frechettem1@wit.edu
